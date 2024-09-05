@@ -82,14 +82,13 @@ const Work = () => {
       onClick={() => setSelectedProject(project)}
     >
       <div className="relative w-full h-64">
-        {" "}
-        {/* Fixed height container */}
         <Image
           src={project.image}
           alt={project.title}
-          layout="fill"
-          objectFit="cover"
-          className="w-full h-full"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="w-full h-full object-cover"
+          priority
         />
       </div>
       <div className="p-4">
