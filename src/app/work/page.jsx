@@ -190,7 +190,7 @@ const Work = () => {
     >
       <motion.h1
         variants={itemVariants}
-        className="text-5xl font-extrabold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-[#a7cbeb] to-blue-600"
+        className="text-5xl font-extrabold mb-12 text-center bg-clip-text text-transparent text-white"
       >
         My Work
       </motion.h1>

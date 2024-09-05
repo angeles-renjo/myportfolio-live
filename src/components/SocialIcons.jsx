@@ -5,7 +5,7 @@ import Link from "next/link";
 const SocialIcons = ({ size = 24 }) => (
   <div className="text-center">
     <h1 className="text-3xl font-thin text-[#a7cbeb] py-4">
-      renjoangeles@gmail.com
+      renjo.vicente@gmail.com
     </h1>
     <ul className="social flex justify-center space-x-4">
       <li className="social-item">
