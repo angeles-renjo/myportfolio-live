@@ -90,8 +90,8 @@ const TrailingSphere = ({ position, color }) => {
   return (
     <>
       <Trail
-        width={0.15}
-        length={30}
+        width={0.3}
+        length={15}
         color={color}
         attenuation={(t) => {
           return MathUtils.clamp(1 - t, 0, 1);
@@ -185,7 +185,7 @@ const IconSphere = ({
       rotationAxis.current.set(xAxis, yAxis, zAxis).normalize();
 
       // Dynamic rotation speed
-      const rotationSpeed = Math.sin(time.current) * 0.0015 + 0.003;
+      const rotationSpeed = Math.sin(time.current) * 0.0015 + 0.01;
 
       quaternion.current.setFromAxisAngle(rotationAxis.current, rotationSpeed);
       groupRef.current.quaternion.multiplyQuaternions(
