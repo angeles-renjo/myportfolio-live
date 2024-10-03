@@ -19,7 +19,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 p-4">
       <nav className="bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-full px-4 py-2 flex justify-between items-center">
         <Link href="/" className="text-white font-bold text-xl">
-          RA
+          RVA
         </Link>
 
         {/* Desktop Menu */}
