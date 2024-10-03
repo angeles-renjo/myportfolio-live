@@ -16,7 +16,7 @@ const skills = [
   { name: "CSS", color: "#264de4", level: 85, icon: FaCss3Alt },
   { name: "JS", color: "#f0db4f", level: 80, icon: FaJs },
   { name: "React", color: "#61dafb", level: 75, icon: FaReact },
-  { name: "Next.js", color: "#000000", level: 70, icon: SiNextdotjs },
+  { name: "Next.js", color: "gray", level: 70, icon: SiNextdotjs },
   { name: "Node.js", color: "#339933", level: 65, icon: FaNodeJs },
   { name: "Git", color: "#f05032", level: 85, icon: FaGitAlt },
   { name: "MongoDB", color: "#47a248", level: 60, icon: FaDatabase },
