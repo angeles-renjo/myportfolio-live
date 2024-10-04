@@ -30,7 +30,7 @@ const featuredProjects = [
     title: "Workout App",
     description:
       "A fitness application developed using Expo and React Native. Features daily action notifications, workout management for creating and editing plans, and a calendar view. Utilizes Supabase for backend services and React Native Calendars for the UI.",
-    image: "/project3.jpg",
+    image: "/assets/images/workout.png",
     demoLink: "https://demo-link-3.com",
     repoLink: "https://github.com/user/repo3",
     techStack: ["React Native", "Expo", "Supabase", "React Native Calendars"],
