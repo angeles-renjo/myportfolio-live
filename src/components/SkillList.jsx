@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaHtml5,
   FaCss3Alt,
@@ -12,73 +12,140 @@ import {
 import { SiNextdotjs, SiTailwindcss, SiTypescript } from "react-icons/si";
 
 const skills = [
-  { name: "HTML", color: "#e34c26", level: 90, icon: FaHtml5 },
-  { name: "CSS", color: "#264de4", level: 85, icon: FaCss3Alt },
-  { name: "JS", color: "#f0db4f", level: 80, icon: FaJs },
-  { name: "React", color: "#61dafb", level: 75, icon: FaReact },
-  { name: "Next.js", color: "gray", level: 70, icon: SiNextdotjs },
-  { name: "Node.js", color: "#339933", level: 65, icon: FaNodeJs },
-  { name: "Git", color: "#f05032", level: 85, icon: FaGitAlt },
-  { name: "MongoDB", color: "#47a248", level: 60, icon: FaDatabase },
-  { name: "TailwindCSS", color: "#38b2ac", level: 75, icon: SiTailwindcss },
-  { name: "TypeScript", color: "#007acc", level: 50, icon: SiTypescript },
+  { name: "HTML", color: "#e34c26", icon: FaHtml5 },
+  { name: "CSS", color: "#264de4", icon: FaCss3Alt },
+  { name: "JS", color: "#f0db4f", icon: FaJs },
+  { name: "React", color: "#61dafb", icon: FaReact },
+  { name: "Next.js", color: "gray", icon: SiNextdotjs },
+  { name: "Node.js", color: "#339933", icon: FaNodeJs },
+  { name: "Git", color: "#f05032", icon: FaGitAlt },
+  { name: "MongoDB", color: "#47a248", icon: FaDatabase },
+  { name: "TailwindCSS", color: "#38b2ac", icon: SiTailwindcss },
+  { name: "TypeScript", color: "#007acc", icon: SiTypescript },
 ];
 
-const ProgressBar = ({ value, color }) => (
-  <div className="w-full h-2 overflow-hidden">
-    <motion.div
-      className="h-full"
-      style={{ backgroundColor: color }}
-      initial={{ width: 0 }}
-      animate={{ width: `${value}%` }}
-      transition={{ duration: 1, ease: "easeOut" }}
-    />
-  </div>
-);
-
-const SkillProgress = ({ skill, index }) => {
+const SkillIcon = ({ skill, isSelected, onSelect }) => {
   const Icon = skill.icon;
   return (
     <motion.div
-      className="mb-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative group"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+        rotate: {
+          duration: 0.5,
+          ease: "easeInOut",
+        },
+      }}
+      onClick={() => onSelect(skill)}
     >
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center">
-          <Icon className="w-6 h-6 mr-2" style={{ color: skill.color }} />
-          <span className="text-lg font-semibold">{skill.name}</span>
-        </div>
-        <motion.span
-          className="text-sm font-medium"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
-        >
-          {skill.level}%
-        </motion.span>
-      </div>
-      <ProgressBar value={skill.level} color={skill.color} />
+      <motion.div
+        className={`
+          w-24 h-24 rounded-2xl flex items-center justify-center
+          backdrop-blur-lg cursor-pointer
+          ${isSelected ? "bg-white/20" : "bg-white/10"}
+        `}
+        whileHover={{
+          boxShadow: `0 0 20px ${skill.color}40`,
+        }}
+      >
+        <Icon
+          className="w-12 h-12 transition-all duration-300 ease-out"
+          style={{ color: skill.color }}
+        />
+      </motion.div>
+      <motion.div
+        className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-full"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      ></motion.div>
     </motion.div>
   );
 };
 
+const SkillDetail = ({ skill }) => (
+  <motion.div
+    className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 0.8 }}
+    transition={{ duration: 0.3 }}
+  >
+    <div className="text-center p-8 rounded-3xl backdrop-blur-xl ">
+      <motion.div
+        className="mb-6"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        <skill.icon
+          className="w-24 h-24 mx-auto"
+          style={{ color: skill.color }}
+        />
+      </motion.div>
+      <motion.h2
+        className="text-4xl font-thin mb-4"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        {skill.name}
+      </motion.h2>
+    </div>
+  </motion.div>
+);
+
 const SkillsList = () => {
+  const [selectedSkill, setSelectedSkill] = useState(null);
+
   return (
-    <motion.div
-      className="max-w-2xl mx-auto p-8"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      style={{
-        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
-      }}
-    >
-      {skills.map((skill, index) => (
-        <SkillProgress key={skill.name} skill={skill} index={index} />
-      ))}
-    </motion.div>
+    <div className="relative min-h-screen text-white overflow-hidden flex items-center">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br ">
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="">
+        <motion.div
+          className="max-w-6xl mx-auto p-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+            {skills.map((skill, index) => (
+              <SkillIcon
+                key={skill.name}
+                skill={skill}
+                isSelected={selectedSkill?.name === skill.name}
+                onSelect={setSelectedSkill}
+              />
+            ))}
+          </div>
+        </motion.div>
+
+        <AnimatePresence>
+          {selectedSkill && (
+            <motion.div
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedSkill(null)}
+            >
+              <SkillDetail skill={selectedSkill} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
   );
 };
 
