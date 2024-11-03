@@ -103,47 +103,42 @@ const SkillsList = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden flex items-center">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br ">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)]" />
-        </div>
-      </div>
-
-      {/* Content */}
+    <div className="relative  text-white  flex">
       <div className="">
-        <motion.div
-          className="max-w-6xl mx-auto p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            {skills.map((skill, index) => (
-              <SkillIcon
-                key={skill.name}
-                skill={skill}
-                isSelected={selectedSkill?.name === skill.name}
-                onSelect={setSelectedSkill}
-              />
-            ))}
-          </div>
-        </motion.div>
+        {/* Content */}
+        <div className="">
+          <motion.div
+            className="max-w-6xl mx-auto p-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="flex flex-wrap gap-4  justify-center">
+              {skills.map((skill, index) => (
+                <SkillIcon
+                  key={skill.name}
+                  skill={skill}
+                  isSelected={selectedSkill?.name === skill.name}
+                  onSelect={setSelectedSkill}
+                />
+              ))}
+            </div>
+          </motion.div>
 
-        <AnimatePresence>
-          {selectedSkill && (
-            <motion.div
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedSkill(null)}
-            >
-              <SkillDetail skill={selectedSkill} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+          <AnimatePresence>
+            {selectedSkill && (
+              <motion.div
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedSkill(null)}
+              >
+                <SkillDetail skill={selectedSkill} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
