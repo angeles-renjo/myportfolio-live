@@ -33,6 +33,15 @@ const featuredProjects = [
     image: "/assets/images/workout.png",
     techStack: ["React Native", "Expo", "Supabase", "React Native Calendars"],
   },
+  {
+    id: 4,
+    title: "GrocerEase",
+    description:
+      "Developed a smart grocery management solution with multi-list support and due date tracking.",
+    image: "/assets/images/grocerease-nobg.png",
+    repoLink: "https://github.com/angeles-renjo/grocery-appv2",
+    techStack: ["React Native", "Expo", "Asyncstorage"],
+  },
 ];
 
 const useInitialAnimation = () => {
