@@ -21,8 +21,8 @@ const featuredProjects = [
     description:
       "A Next.js web application for trade tracking and financial goal management. Includes data visualization for trade data, journal entry management for submitting and managing trades, and uses Prisma with PostgreSQL for efficient data handling.",
     image: "/assets/images/tradingjournal.png",
-    demoLink: "https://trading-journal-live.vercel.app/",
-    // repoLink: "https://github.com/user/repo2",
+    // demoLink: "https://trading-journal-live.vercel.app/",
+    repoLink: "https://github.com/angeles-renjo/tradingjournalv2",
     techStack: ["Next.js", "Supabase", "Tremor"],
   },
   {
